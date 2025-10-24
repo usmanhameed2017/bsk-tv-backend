@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const bcrypt = require("bcrypt");
 
 // Schema
 const userSchema = new Schema({
@@ -55,6 +56,50 @@ const userSchema = new Schema({
     isVerified: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now },
 }, { timestamps: true });
+
+// Hash password
+userSchema.pre("save", async function(next) {
+    if(!this.isModified("password")) return next();
+    try 
+    {
+        this.password = await bcrypt.hash(this.password, 10);
+        return next();
+    } 
+    catch(error) 
+    {
+        console.log("Failed to hash password before saving", error.message);
+        return next();
+    }
+});
+
+// Match password
+userSchema.methods.matchPassword = async function(password) {
+    if(!password) return false;
+    try 
+    {
+       return await bcrypt.compare(password, this.password); 
+    } 
+    catch (error) 
+    {
+        console.log("Failed to compare passwords", error.message);
+        return false;
+    }
+}
+
+// Get user by email
+userSchema.static("getUser", async function(email) {
+    try 
+    {
+        const user = await this.findOne({ email });
+        if(!user) return null;
+        return user;
+    } 
+    catch(error) 
+    {
+        console.log(error.message);
+        return null;
+    }
+});
 
 // Model
 const User = model("User", userSchema);
