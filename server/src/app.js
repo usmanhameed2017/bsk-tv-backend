@@ -20,12 +20,12 @@ app.use(compression());
 
 // ************* ROUTES ************* //
 // const authRouter = require("./routes/auth");
-// const userRouter = require("./routes/user");
+const userRouter = require("./routes/user");
 
 
 // Registered routes
 // app.use("/api/v1/auth", authRouter);
-// app.use("/api/v1/user", userRouter);
+app.use("/api/v1/user", userRouter);
 
 // Error handling middleware
 app.use(errorHandler);
