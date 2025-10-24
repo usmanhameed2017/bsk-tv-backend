@@ -74,15 +74,15 @@ Example Models:
 
 ### 🧰 API Security Highlights
 
-Helmet: Adds HTTP headers for enhanced API protection
+**Helmet**: Adds HTTP headers for enhanced API protection
 
-Rate Limiting: Throttles requests to prevent abuse
+**Rate Limiting**: Throttles requests to prevent abuse
 
-CORS: Only allows whitelisted frontend domains
+**CORS**: Only allows whitelisted frontend domains
 
-JWT: Authenticates each API request securely
+**JWT**: Authenticates each API request securely
 
-bcrypt: Encrypts user passwords before storage
+**bcrypt**: Encrypts user passwords before storage
 
 ### 💻 Project Goal
 
