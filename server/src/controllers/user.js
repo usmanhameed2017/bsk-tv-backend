@@ -35,4 +35,18 @@ const createUser = async (request, response) => {
     }
 };
 
-module.exports = { createUser };
+// Fetch all users
+const fetchAllUser = async (request, response) => {
+    try 
+    {
+
+        const users = await User.aggregate([ { $match:{} } ]);
+        return response.status(200).json(new ApiResponse(200, users, "User have been fetched"));
+    } 
+    catch(error) 
+    {
+        throw error;
+    }
+};
+
+module.exports = { createUser, fetchAllUser };
