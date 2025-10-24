@@ -3,9 +3,9 @@ const { Schema, model } = require("mongoose");
 // Schema
 const userSchema = new Schema({
     // Basic Account Info
-    name: { type: String, required: true, trim: true },
-    email: { type: String, required: true, unique: true, lowercase: true },
-    password: { type: String, required: true, minlength: 6 },
+    name: { type: String, required: [true, "Name is required"], trim: true },
+    email: { type: String, required: true, unique: [true, "Tihs email is already taken"], lowercase: true },
+    password: { type: String, required: true, minlength: [6, "Password must be at least 8 characters long"] },
 
     // Profile & Avatar
     avatar: {
